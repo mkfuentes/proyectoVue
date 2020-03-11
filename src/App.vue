@@ -1,28 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Navbar title="Kodium" />
+    <section class="container" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import Navbar from './components/Navbar'
+// import PostCard from './components/PostCard'
 
 export default {
-  name: 'App',
+  name: 'Kodium',
   components: {
-    HelloWorld
+    Navbar
+  },
+  data () {
+    return {
+      posts: []
+    }
+  },
+  async mounted () {
+    const response = await fetch('http://localhost:8080/posts')
+
+    const payload = await response.json()
+
+    this.posts = payload.data.posts
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style src="bootstrap/dist/css/bootstrap.min.css">
 </style>
